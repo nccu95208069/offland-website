@@ -1,0 +1,218 @@
+.story {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.story h2 {
+    font-family: var(--font-serif);
+    font-size: var(--text-3xl);
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.story h3 {
+    font-family: var(--font-serif);
+    font-size: var(--text-xl);
+    color: var(--color-text-secondary);
+    font-weight: 400;
+    margin-bottom: var(--spacing-lg);
+}
+
+.storyContent {
+    text-align: left;
+    margin-top: var(--spacing-lg);
+}
+
+/* Video Background Layout */
+.videoBackgroundSection {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Align content to the left */
+    overflow: hidden;
+    padding: var(--spacing-2xl) var(--spacing-md);
+    /* More padding on sides */
+    background: var(--color-bg-dark);
+    /* Fallback */
+}
+
+/* ... existing videoWrapper ... */
+
+.videoWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.videoOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    /* Slightly darker for better contrast */
+    /* Dark overlay for readability */
+    z-index: 1;
+}
+
+.storyTextOverlay {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    /* Narrower for left alignment */
+    width: 100%;
+    color: #FFFFFF;
+    text-align: center;
+    /* Left align text */
+}
+
+.storyTextOverlay h2 {
+    font-family: var(--font-serif);
+    font-size: var(--text-3xl);
+    color: #FFFFFF;
+    margin-bottom: var(--spacing-xs);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.storyTextOverlay h3 {
+    font-family: var(--font-serif);
+    font-size: var(--text-xl);
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 400;
+    margin-bottom: var(--spacing-xl);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.storyContentOverlay {
+    text-align: left;
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+.storyContentOverlay p {
+    font-family: var(--font-serif);
+    font-size: var(--text-base);
+    line-height: 2;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: var(--spacing-md);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.storyContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-2xl);
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.storyText {
+    flex: 1;
+}
+
+.videoContainer {
+    width: 100%;
+    height: 600px;
+    /* Vertical video height */
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.storyContent p {
+    font-family: var(--font-serif);
+    font-size: var(--text-base);
+    line-height: 2;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-md);
+}
+
+.whyChoose {
+    background-color: var(--color-bg-cream);
+}
+
+.whyChoose h2 {
+    font-family: var(--font-serif);
+    font-size: var(--text-3xl);
+    color: var(--color-primary);
+}
+
+.reason {
+    text-align: center;
+    padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.iconWrapper {
+    width: 48px;
+    height: 48px;
+    margin-bottom: var(--spacing-md);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.iconWrapper svg {
+    width: 100%;
+    height: 100%;
+    stroke-width: 1.5;
+}
+
+.reasonIcon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.reason h3 {
+    font-family: var(--font-serif);
+    font-size: var(--text-lg);
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-sm);
+}
+
+.reason p {
+    font-size: var(--text-sm);
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+}
+
+@media (max-width: 768px) {
+    .storyContainer {
+        grid-template-columns: 1fr;
+    }
+
+    .videoContainer {
+        height: 400px;
+        margin-top: var(--spacing-md);
+    }
+
+    .story h2 {
+        font-size: var(--text-2xl);
+    }
+
+    .story h3 {
+        font-size: var(--text-base);
+    }
+
+    .storyContent p {
+        font-size: var(--text-sm);
+    }
+}

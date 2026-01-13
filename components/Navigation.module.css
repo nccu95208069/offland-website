@@ -1,0 +1,208 @@
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: transparent;
+    transition: all var(--transition-base);
+    padding: var(--spacing-sm) 0;
+}
+
+.nav.scrolled {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-sm);
+}
+
+.container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    z-index: 1001;
+}
+
+.logo img {
+    height: auto;
+}
+
+.navLinks {
+    display: flex;
+    list-style: none;
+    gap: var(--spacing-md);
+    margin: 0;
+    padding: 0;
+}
+
+.navLinks a {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-primary);
+    transition: color var(--transition-fast);
+    position: relative;
+}
+
+.nav.scrolled .navLinks a {
+    color: var(--color-primary);
+}
+
+.navLinks a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-primary);
+    transition: width var(--transition-base);
+}
+
+.nav.scrolled .navLinks a::after {
+    background-color: var(--color-primary);
+}
+
+.navLinks a:hover {
+    color: var(--color-primary-dark);
+}
+
+.nav.scrolled .navLinks a:hover {
+    color: var(--color-primary-dark);
+}
+
+.navLinks a:hover::after {
+    width: 100%;
+}
+
+.ctaButton {
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.ctaButton:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Mobile Menu Button */
+.mobileMenuButton {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 1001;
+}
+
+.mobileMenuButton span {
+    width: 25px;
+    height: 2px;
+    background-color: var(--color-primary);
+    transition: all var(--transition-base);
+}
+
+.nav.scrolled .mobileMenuButton span {
+    background-color: var(--color-primary);
+}
+
+.mobileMenuButton span.open:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 7px);
+}
+
+.mobileMenuButton span.open:nth-child(2) {
+    opacity: 0;
+}
+
+.mobileMenuButton span.open:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* Mobile Menu */
+.mobileMenu {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--color-bg-light);
+    padding-top: 80px;
+    transform: translateX(100%);
+    transition: transform var(--transition-base);
+    z-index: 999;
+}
+
+.mobileMenu.mobileMenuOpen {
+    transform: translateX(0);
+}
+
+.mobileMenu ul {
+    list-style: none;
+    padding: var(--spacing-md);
+    margin: 0;
+}
+
+.mobileMenu li {
+    margin-bottom: var(--spacing-md);
+}
+
+.mobileMenu a {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: var(--text-lg);
+    font-weight: 500;
+    color: var(--color-text-primary);
+    padding: var(--spacing-sm);
+    transition: color var(--transition-fast);
+}
+
+.mobileMenu a:hover {
+    color: var(--color-primary);
+}
+
+.mobileCtaButton {
+    width: 100%;
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: var(--spacing-sm);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+
+    .navLinks,
+    .ctaButton {
+        display: none;
+    }
+
+    .mobileMenuButton,
+    .mobileMenu {
+        display: flex;
+    }
+}

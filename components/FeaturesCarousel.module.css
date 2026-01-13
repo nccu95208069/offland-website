@@ -1,0 +1,194 @@
+/* Desktop Styles */
+.featuresWrapper {
+    display: contents;
+}
+
+.featureRow {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-2xl);
+    min-height: auto;
+    align-items: center;
+}
+
+.featureRow:last-child {
+    margin-bottom: 0;
+}
+
+.featureRowReverse {
+    grid-template-columns: 1fr 1.5fr;
+}
+
+.featureRowReverse .featureText {
+    order: 1;
+}
+
+.featureRowReverse .featureImage {
+    order: 2;
+}
+
+.featureImage {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 60%;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+}
+
+.featureImage img {
+    transition: transform var(--transition-slow);
+    position: absolute !important;
+    top: 0;
+    left: 0;
+}
+
+.featureRow:hover .featureImage img {
+    transform: scale(1.03);
+}
+
+.featureText {
+    padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 100%;
+}
+
+.featureText::before {
+    content: attr(data-label);
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 500;
+}
+
+.featureText h2 {
+    font-family: var(--font-serif);
+    font-size: 1.875rem;
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.3;
+    font-weight: 400;
+    padding-bottom: var(--spacing-sm);
+    position: relative;
+}
+
+.featureText h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 80px;
+    height: 1px;
+    background-color: var(--color-primary);
+}
+
+.featureText p {
+    font-size: 0.9375rem;
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-md);
+}
+
+/* Mobile Controls - Hidden on Desktop */
+.mobileControls {
+    display: none;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .featuresWrapper {
+        display: flex !important;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .featuresWrapper::-webkit-scrollbar {
+        display: none;
+    }
+
+    .featureRow,
+    .featureRowReverse {
+        flex: 0 0 100%;
+        scroll-snap-align: start;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 0;
+    }
+
+    /* Force image to always be on top in mobile */
+    .featureRow .featureImage,
+    .featureRowReverse .featureImage {
+        order: 1 !important;
+        padding-bottom: 75%;
+        border-radius: 0;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .featureRow .featureText,
+    .featureRowReverse .featureText {
+        order: 2 !important;
+        padding: var(--spacing-lg) var(--spacing-md) 0;
+    }
+
+    /* Mobile Controls */
+    .mobileControls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--spacing-md);
+        padding: var(--spacing-sm) 0 var(--spacing-md);
+    }
+
+    .navButton {
+        background-color: transparent;
+        border: 1px solid var(--color-text-light);
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-text-secondary);
+        cursor: pointer;
+        transition: all var(--transition-base);
+    }
+
+    .navButton:active {
+        background-color: var(--color-bg-cream);
+        border-color: var(--color-primary);
+        color: var(--color-primary);
+    }
+
+    /* Carousel Indicators */
+    .carouselIndicators {
+        display: flex;
+        justify-content: center;
+        gap: var(--spacing-xs);
+    }
+
+    .carouselDot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: var(--color-text-light);
+        transition: all var(--transition-base);
+        cursor: pointer;
+    }
+
+    .carouselDot.active {
+        background-color: var(--color-primary);
+        width: 24px;
+        border-radius: 4px;
+    }
+}

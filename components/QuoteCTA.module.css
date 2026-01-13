@@ -1,0 +1,18 @@
+.quoteCta {
+    padding: var(--spacing-2xl) 0;
+    background-color: var(--color-bg-light);
+    text-align: center;
+}
+
+.quoteCta h2 {
+    font-family: var(--font-serif);
+    font-size: var(--text-2xl);
+    color: var(--color-primary);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-lg);
+    font-weight: 500;
+}
+
+.btnWrapper {
+    margin-top: var(--spacing-lg);
+}

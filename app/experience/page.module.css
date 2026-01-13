@@ -1,0 +1,138 @@
+.facilitiesGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+}
+
+.facilityCard {
+    background: var(--color-bg-white);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.facilityImage {
+    position: relative;
+    width: 100%;
+    padding-bottom: 60%;
+}
+
+.facilityCard h3 {
+    font-family: var(--font-serif);
+    font-size: var(--text-lg);
+    color: var(--color-primary);
+    padding: var(--spacing-md) var(--spacing-md) var(--spacing-xs);
+}
+
+.facilityCard ul {
+    list-style: none;
+    padding: 0 var(--spacing-md) var(--spacing-md);
+    margin: 0;
+}
+
+.facilityCard li {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    padding: 0.25rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.facilityCard li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+    font-weight: bold;
+}
+
+.attractions {
+    background-color: var(--color-bg-cream);
+}
+
+.attractionCard {
+    background: var(--color-bg-white);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.attractionCard h3 {
+    font-family: var(--font-serif);
+    font-size: var(--text-lg);
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-xs);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.iconInline {
+    width: 24px;
+    height: 24px;
+}
+
+.distance {
+    font-size: var(--text-sm);
+    color: var(--color-primary);
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+}
+
+.attractionCard p:last-child {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+}
+
+.shops {
+    background-color: var(--color-bg-white);
+}
+
+.shopCategory {
+    margin-bottom: var(--spacing-xl);
+}
+
+.shopCategory:last-child {
+    margin-bottom: 0;
+}
+
+.shopCategory h3 {
+    font-family: var(--font-serif);
+    font-size: var(--text-xl);
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-md);
+}
+
+.shopCard {
+    background: var(--color-bg-cream);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--color-primary);
+}
+
+.shopCard h4 {
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    color: var(--color-text-primary);
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.rating {
+    font-size: var(--text-xs);
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.shopCard p:last-child {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+    .facilitiesGrid {
+        grid-template-columns: 1fr;
+    }
+}
