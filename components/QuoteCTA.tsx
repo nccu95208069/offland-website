@@ -10,9 +10,14 @@ export default function QuoteCTA() {
                     因為真正的目的地，是那個放鬆下來的自己。
                 </h2>
                 <div className={styles.btnWrapper}>
-                    <Link href="/booking" className="btn btn-primary btn-lg">
+                    <a
+                        href="https://www.booking-owlnest.com/offland?lang=zh_TW&adult=1&child=0&infant=0"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn btn-primary btn-lg"
+                    >
                         立即預訂 OFFLAND
-                    </Link>
+                    </a>
                 </div>
             </div>
         </section>
