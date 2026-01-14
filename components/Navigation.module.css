@@ -144,11 +144,14 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--color-bg-light);
+    /* ensure background is opaque white */
+    background-color: #ffffff;
     padding-top: 80px;
     transform: translateX(100%);
     transition: transform var(--transition-base);
     z-index: 999;
+    overflow-y: auto;
+    /* allow scrolling if menu is tall */
 }
 
 .mobileMenu.mobileMenuOpen {
