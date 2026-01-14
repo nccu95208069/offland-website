@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import GoogleAnalytics from '@/components/GoogleAnalytics';
 import './globals.css';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://offland.com'),
+  metadataBase: new URL('https://www.offland-yilan.com'),
   title: {
     default: 'OFFLAND 遺忘無際｜宜蘭 4-6 人小包棟民宿',
     template: '%s | OFFLAND 遺忘無際',
@@ -17,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'zh_TW',
-    url: 'https://offland.com',
+    url: 'https://www.offland-yilan.com',
     siteName: 'OFFLAND 遺忘無際',
     title: 'OFFLAND 遺忘無際｜宜蘭 4-6 人小包棟民宿',
     description: 'OFFLAND 遺忘無際是一間位於宜蘭五結的 4–6 人小包棟民宿，不用湊人數即可包棟，提供 13:00 晚退房，鄰近冬山河，適合想安靜放鬆的旅人。',
@@ -51,6 +52,9 @@ export default function RootLayout({
   return (
     <html lang="zh-TW">
       <body>
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+        )}
         <Navigation />
         {children}
         <Footer />
