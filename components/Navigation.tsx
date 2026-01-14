@@ -31,7 +31,7 @@ export default function Navigation() {
   ];
 
   return (
-    <nav className={`${styles.nav} ${isScrolled ? styles.scrolled : ''}`}>
+    <><nav className={`${styles.nav} ${isScrolled ? styles.scrolled : ''}`}>
       <div className={styles.container}>
         <Link href="/" className={styles.logo}>
           <Image
@@ -70,8 +70,8 @@ export default function Navigation() {
           <span className={isMobileMenuOpen ? styles.open : ''}></span>
         </button>
       </div>
-
-      {/* Mobile Menu */}
+    </nav>
+      {/* Mobile Menu moved outside to avoid clipping by nav's backdrop-filter */}
       <div className={`${styles.mobileMenu} ${isMobileMenuOpen ? styles.mobileMenuOpen : ''}`}>
         <ul>
           {navLinks.map((link) => (
@@ -97,6 +97,6 @@ export default function Navigation() {
           </li>
         </ul>
       </div>
-    </nav>
+    </>
   );
 }
