@@ -19,7 +19,14 @@ export default function Navigation() {
   }, []);
 
   const handleBookingClick = () => {
-    // GA4 tracking will be added later
+    // GA4 事件追蹤
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', 'booking_click', {
+        event_category: 'engagement',
+        event_label: 'Navigation CTA',
+        value: 1,
+      });
+    }
     window.open('https://www.booking-owlnest.com/offland?lang=zh_TW&adult=1&child=0&infant=0', '_blank');
   };
 
@@ -63,7 +70,8 @@ export default function Navigation() {
         <button
           className={styles.mobileMenuButton}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="選單"
+          aria-label={isMobileMenuOpen ? '關閉選單' : '開啟選單'}
+          aria-expanded={isMobileMenuOpen}
         >
           <span className={isMobileMenuOpen ? styles.open : ''}></span>
           <span className={isMobileMenuOpen ? styles.open : ''}></span>

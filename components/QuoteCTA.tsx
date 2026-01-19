@@ -1,7 +1,19 @@
-import Link from 'next/link';
+'use client';
+
 import styles from './QuoteCTA.module.css';
 
 export default function QuoteCTA() {
+    const handleBookingClick = () => {
+        // GA4 事件追蹤
+        if (typeof window !== 'undefined' && (window as any).gtag) {
+            (window as any).gtag('event', 'booking_click', {
+                event_category: 'engagement',
+                event_label: 'Quote CTA',
+                value: 1,
+            });
+        }
+    };
+
     return (
         <section className={styles.quoteCta}>
             <div className="container">
@@ -15,6 +27,7 @@ export default function QuoteCTA() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="btn btn-primary btn-lg"
+                        onClick={handleBookingClick}
                     >
                         立即預訂 OFFLAND
                     </a>

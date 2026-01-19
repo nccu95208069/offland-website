@@ -93,6 +93,18 @@ export default function Hero({
                         nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                 }}
+                onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        const nextSection = document.querySelector('main > section:nth-child(2)');
+                        if (nextSection) {
+                            nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    }
+                }}
+                role="button"
+                tabIndex={0}
+                aria-label="向下滾動到下一個區塊"
                 style={{ cursor: 'pointer' }}
             >
                 <div className={styles.mouse}>
