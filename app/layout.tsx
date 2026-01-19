@@ -44,6 +44,12 @@ export const metadata: Metadata = {
   },
 };
 
+// Preconnect to external domains for better performance
+const preconnectDomains = [
+  'https://maps.google.com',
+  'https://maps.gstatic.com',
+];
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -51,6 +57,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-TW">
+      <head>
+        {preconnectDomains.map((domain) => (
+          <link key={domain} rel="preconnect" href={domain} />
+        ))}
+      </head>
       <body>
         {process.env.NEXT_PUBLIC_GA_ID && (
           <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
