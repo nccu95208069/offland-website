@@ -42,6 +42,7 @@ export default function Navigation() {
     { href: '/about', label: '關於 OFFLAND' },
     { href: '/spaces', label: '空間與房型' },
     { href: '/experience', label: '入住體驗' },
+    { href: '/blog', label: '旅誌' },
     { href: '/faq', label: '常見問題' },
   ];
 

@@ -63,7 +63,7 @@ export default function BookingPage() {
                             <p>
                                 可以的！OFFLAND 是寵物友善民宿，歡迎您帶毛孩一起來。
                                 每隻毛孩需酌收 $500 清潔消毒費。請務必仔細閱讀並遵守我們的
-                                <a href="https://drive.google.com/file/d/1nJQaGFRuXRX40TNPugHnmb_lQUUimzSN/view" target="_blank" rel="noopener noreferrer">
+                                <a href="https://drive.google.com/file/d/1tMuMHryw44vW_PcVfSsHsOLyFrWUo3ao/view?usp=sharing" target="_blank" rel="noopener noreferrer">
                                     寵物入住守則
                                 </a>
                                 ，讓大家都能有愉快的入住體驗。

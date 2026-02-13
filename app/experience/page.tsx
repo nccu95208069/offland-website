@@ -91,7 +91,7 @@ export default function ExperiencePage() {
                                 <li>每隻毛孩酌收 $500 清潔費</li>
                             </ul>
                             <a
-                                href="https://drive.google.com/file/d/1nJQaGFRuXRX40TNPugHnmb_lQUUimzSN/view"
+                                href="https://drive.google.com/file/d/1tMuMHryw44vW_PcVfSsHsOLyFrWUo3ao/view?usp=sharing"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 style={{

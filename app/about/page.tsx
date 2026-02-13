@@ -78,7 +78,7 @@ export default function AboutPage() {
                                 OFFLAND 是寵物友善民宿，歡迎帶著毛小孩一起入住，享受在草皮上奔跑的快樂時光。
                                 <br />
                                 <a
-                                    href="https://drive.google.com/file/d/1nJQaGFRuXRX40TNPugHnmb_lQUUimzSN/view"
+                                    href="https://drive.google.com/file/d/1tMuMHryw44vW_PcVfSsHsOLyFrWUo3ao/view?usp=sharing"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     style={{

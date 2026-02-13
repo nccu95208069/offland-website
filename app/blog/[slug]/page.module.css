@@ -1,0 +1,315 @@
+/* ===== Blog Article Page ===== */
+
+.main {
+    min-height: 100vh;
+    background-color: var(--color-bg-light);
+}
+
+/* Cover Image */
+.coverWrapper {
+    position: relative;
+    width: 100%;
+    height: 55vh;
+    min-height: 360px;
+    max-height: 560px;
+}
+
+.coverImage {
+    object-fit: cover;
+}
+
+.coverOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+            transparent 40%,
+            rgba(0, 0, 0, 0.15) 70%,
+            var(--color-bg-light) 100%);
+}
+
+/* Article */
+.article {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 var(--container-padding) var(--spacing-2xl);
+    position: relative;
+    z-index: 1;
+    margin-top: -4rem;
+}
+
+.article:has(.breadcrumb:first-child) {
+    margin-top: 0;
+}
+
+.main:not(:has(.coverWrapper)) .article {
+    margin-top: 0;
+    padding-top: calc(80px + var(--spacing-xl));
+}
+
+/* Breadcrumb */
+.breadcrumb {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+    margin-bottom: var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.breadcrumb a {
+    color: var(--color-text-light);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.breadcrumb a:hover {
+    color: var(--color-primary);
+}
+
+.breadcrumbSep {
+    opacity: 0.3;
+}
+
+.breadcrumbCurrent {
+    color: var(--color-text-secondary);
+}
+
+/* Header */
+.header {
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-accent);
+}
+
+.tags {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.tag {
+    font-family: var(--font-en);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    padding: 0.2rem 0.7rem;
+    border-radius: 100px;
+    background: var(--color-bg-cream);
+    color: var(--color-primary);
+    text-transform: uppercase;
+}
+
+.header h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--color-text-primary);
+    line-height: 1.4;
+    margin-bottom: 1rem;
+}
+
+.meta {
+    font-family: var(--font-en);
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.metaDivider {
+    opacity: 0.4;
+}
+
+/* Content */
+.content {
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: 2;
+    color: var(--color-text-primary);
+}
+
+.content h2 {
+    font-family: var(--font-serif);
+    font-size: var(--text-xl);
+    font-weight: 600;
+    margin: 2.5rem 0 1rem;
+    color: var(--color-text-primary);
+    position: relative;
+    padding-left: 1rem;
+}
+
+.content h2::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.2em;
+    bottom: 0.2em;
+    width: 3px;
+    background: var(--color-primary);
+    border-radius: 2px;
+}
+
+.content h3 {
+    font-family: var(--font-serif);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    margin: 2rem 0 0.75rem;
+}
+
+.content h4 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 1.5rem 0 0.5rem;
+}
+
+.content p {
+    margin-bottom: 1.5rem;
+    color: var(--color-text-primary);
+}
+
+.content a {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--color-accent);
+    transition: text-decoration-color var(--transition-fast);
+}
+
+.content a:hover {
+    text-decoration-color: var(--color-primary);
+}
+
+.content strong {
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.content blockquote {
+    border-left: 3px solid var(--color-primary);
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    background: var(--color-bg-cream);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-style: italic;
+    color: var(--color-text-secondary);
+}
+
+.content ul,
+.content ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.content li {
+    margin-bottom: 0.5rem;
+}
+
+.content figure {
+    margin: 2rem -1rem;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.content figure img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.content figcaption {
+    font-size: 0.85rem;
+    color: var(--color-text-light);
+    text-align: center;
+    padding: 0.75rem 1rem;
+    background: var(--color-bg-cream);
+}
+
+.content pre {
+    background: #1a1a1a;
+    color: #e0e0e0;
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.content code {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 0.85em;
+}
+
+.content p code {
+    background: var(--color-bg-cream);
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+    color: var(--color-primary-dark);
+}
+
+.content hr {
+    border: none;
+    border-top: 1px solid var(--color-accent);
+    margin: 2.5rem 0;
+}
+
+.content :global(.callout) {
+    display: flex;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    background: var(--color-bg-cream);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-accent);
+}
+
+.content :global(.callout-icon) {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+/* Article Footer */
+.articleFooter {
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--color-accent);
+}
+
+.backLink a {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: letter-spacing var(--transition-fast);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.backLink a:hover {
+    letter-spacing: 0.03em;
+    color: var(--color-primary-dark);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+    .coverWrapper {
+        height: 40vh;
+        min-height: 260px;
+    }
+
+    .article {
+        margin-top: -2rem;
+        padding-left: var(--spacing-sm);
+        padding-right: var(--spacing-sm);
+    }
+
+    .content figure {
+        margin-left: -0.5rem;
+        margin-right: -0.5rem;
+    }
+}
