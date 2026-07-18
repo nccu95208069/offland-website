@@ -1,0 +1,879 @@
+/* Offland 晨報 CSS Modules。DESIGN.md §5 的 class 結構。
+   一律引 globals.css 的 CSS variables（大地色系），零 hardcode hex、零 Tailwind、零深藍金。
+   手機優先：base = mobile，@media (min-width:769px) 往上放大。
+   外層 app/admin/layout.tsx 是深色 #1a1a1a → .page 自鋪 cream 滿版蓋掉。*/
+
+.page {
+    min-height: 100vh;
+    background: var(--color-bg-light);
+    padding: var(--spacing-sm);
+}
+
+.container {
+    max-width: 720px;
+    margin: 0 auto;
+    transition: opacity var(--transition-base);
+}
+
+.refreshing {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* ─── Header ─────────────────────────────────────────────── */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--spacing-sm);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 1px solid rgba(44, 44, 44, 0.06);
+}
+
+.headerTitle {
+    font-family: var(--font-serif);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--color-text-primary);
+    margin: 0;
+}
+
+.headerMeta {
+    font-family: var(--font-en);
+    font-size: var(--text-xs);
+    color: var(--color-text-light);
+    margin-top: 4px;
+}
+
+.navPill,
+.refreshPill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 36px;
+    padding: 0 var(--spacing-sm);
+    border-radius: 999px;
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: border-color var(--transition-fast), color var(--transition-fast), background var(--transition-fast);
+}
+
+.navPill {
+    background: var(--color-bg-white);
+    border: 1px solid var(--color-accent);
+    color: var(--color-text-secondary);
+}
+
+.navPill:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+.refreshPill {
+    background: var(--color-bg-cream);
+    border: 1px solid var(--color-accent);
+    color: var(--color-primary);
+}
+
+.refreshPill:hover:not(:disabled) {
+    border-color: var(--color-primary);
+    color: var(--color-primary-dark);
+}
+
+.refreshPill:disabled {
+    opacity: 0.6;
+    cursor: default;
+}
+
+/* ─── Section head ───────────────────────────────────────── */
+.sectionHead {
+    display: flex;
+    align-items: baseline;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-xs);
+    flex-wrap: wrap;
+}
+
+.sectionTag {
+    font-family: var(--font-en);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: var(--color-bg-cream);
+    color: var(--color-primary-dark);
+    border-radius: var(--radius-sm);
+    padding: 2px 8px;
+}
+
+.sectionTitle {
+    font-family: var(--font-serif);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0;
+}
+
+.sectionDate {
+    font-family: var(--font-en);
+    font-size: var(--text-xs);
+    color: var(--color-text-light);
+}
+
+/* ─── Card ───────────────────────────────────────────────── */
+.card {
+    background: var(--color-bg-white);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-sm);
+    box-shadow: var(--shadow-sm), inset 0 0 0 1px rgba(44, 44, 44, 0.05);
+    margin-bottom: var(--spacing-xs);
+}
+
+.subHead {
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-top: var(--spacing-sm);
+    margin-bottom: var(--spacing-xs);
+}
+
+/* ─── Stat grid ──────────────────────────────────────────── */
+.statGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-xs);
+}
+
+.statGridSmall {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-xs);
+}
+
+.statCell {
+    background: var(--color-bg-white);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-xs);
+    box-shadow: inset 0 0 0 1px rgba(44, 44, 44, 0.05);
+}
+
+.statCellHot {
+    background: var(--color-bg-cream);
+    box-shadow: inset 0 0 0 1px rgba(139, 111, 71, 0.15);
+}
+
+.statKey {
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    color: var(--color-text-secondary);
+    font-weight: 500;
+}
+
+.statValueRow {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin-top: 2px;
+}
+
+.statValue {
+    font-family: var(--font-en);
+    font-size: var(--text-lg);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-text-primary);
+}
+
+.statDim {
+    font-family: var(--font-en);
+    font-size: var(--text-xs);
+    font-weight: 500;
+    color: var(--color-text-light);
+}
+
+.statNote {
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    color: var(--color-text-light);
+    line-height: 2;
+}
+
+/* ─── Chips ──────────────────────────────────────────────── */
+.chipRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: var(--spacing-xs);
+}
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    color: var(--color-primary);
+    background: var(--color-bg-cream);
+    border-radius: 999px;
+    padding: 2px 10px;
+}
+
+.chipNum {
+    font-family: var(--font-en);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ─── Night lines (昨晚 / 今晚) ───────────────────────────── */
+.nightLine,
+.tonightBox {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-sm);
+    flex-wrap: wrap;
+}
+
+.nightLabel,
+.tonightLabel {
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--color-text-secondary);
+}
+
+.nightOccupied,
+.tonightOccupied {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    color: var(--color-good-text);
+    font-weight: 500;
+    flex-wrap: wrap;
+}
+
+.nightVacant {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    color: var(--color-warn-text);
+    font-weight: 500;
+}
+
+.tonightVacant {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-serif);
+    font-size: var(--text-lg);
+    color: var(--color-alert-text);
+    font-weight: 600;
+}
+
+.tonightBox {
+    padding: var(--spacing-xs);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-cream);
+}
+
+.nightRevenue {
+    font-family: var(--font-en);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-text-primary);
+}
+
+/* ─── Check-in list ──────────────────────────────────────── */
+.checkInList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    margin-top: var(--spacing-sm);
+}
+
+.checkInItem {
+    padding: var(--spacing-xs);
+    border-radius: var(--radius-md);
+    box-shadow: inset 0 0 0 1px rgba(44, 44, 44, 0.05);
+}
+
+.checkInHead {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    flex-wrap: wrap;
+}
+
+.checkInName {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.checkInPlatform {
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    color: var(--color-primary);
+    background: var(--color-bg-cream);
+    border-radius: var(--radius-sm);
+    padding: 1px 8px;
+}
+
+.checkInMeta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    color: var(--color-text-secondary);
+}
+
+.checkInAmount {
+    font-family: var(--font-en);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-text-primary);
+}
+
+.checkInNotes {
+    margin-top: 4px;
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    color: var(--color-text-light);
+    line-height: 1.7;
+}
+
+.metaDivider {
+    color: var(--color-text-light);
+    opacity: 0.5;
+}
+
+/* ─── comp / 招待 tag ────────────────────────────────────── */
+.compTag {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--color-warn-text);
+    background: var(--color-warn-bg);
+    border: 1px solid var(--color-warn-border);
+    border-radius: var(--radius-sm);
+    padding: 0 6px;
+    margin-left: 4px;
+}
+
+.inlineEmpty {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    color: var(--color-text-light);
+    padding: var(--spacing-xs) 0;
+}
+
+/* ─── Occupancy strip ────────────────────────────────────── */
+.stripWrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.stripGrid {
+    display: grid;
+    gap: 3px;
+    min-width: 480px;
+}
+
+.stripCol {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.stripHeadDate {
+    font-family: var(--font-en);
+    font-size: 10px;
+    color: var(--color-text-light);
+    font-variant-numeric: tabular-nums;
+}
+
+.stripHeadDay {
+    position: relative;
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    padding-bottom: 5px;
+}
+
+.stripHeadDayToday {
+    color: var(--color-primary);
+    font-weight: 700;
+}
+
+.weekendDot {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--color-text-light);
+}
+
+.stripCell {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1.4;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stripCellOccupied {
+    background: var(--color-primary);
+}
+
+.stripCellVacant {
+    background: var(--color-bg-cream);
+    border: 1px dashed var(--color-accent);
+}
+
+.stripCellTonight {
+    box-shadow: inset 0 0 0 1.5px var(--color-primary-dark);
+}
+
+.stripCellName {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--color-bg-white);
+    line-height: 1;
+    text-align: center;
+    word-break: break-all;
+}
+
+.stripCompStar {
+    position: absolute;
+    right: 2px;
+    bottom: 2px;
+    color: var(--color-warn-bg);
+    display: inline-flex;
+}
+
+.occSummary {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: var(--spacing-sm);
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    color: var(--color-text-secondary);
+}
+
+.occNum {
+    font-family: var(--font-en);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-text-primary);
+}
+
+.occWeekend {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--color-warn-text);
+    font-weight: 500;
+}
+
+/* ─── Delta text ─────────────────────────────────────────── */
+.deltaRow {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: var(--spacing-sm);
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    color: var(--color-text-secondary);
+}
+
+.deltaUp {
+    color: var(--color-good-text);
+    font-weight: 600;
+    font-family: var(--font-en);
+    font-variant-numeric: tabular-nums;
+}
+
+.deltaDown {
+    color: var(--color-alert-text);
+    font-weight: 600;
+    font-family: var(--font-en);
+    font-variant-numeric: tabular-nums;
+}
+
+.deltaFlat {
+    color: var(--color-text-light);
+    font-family: var(--font-en);
+    font-variant-numeric: tabular-nums;
+}
+
+/* ─── Platform share bars ────────────────────────────────── */
+.hbarList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.hbarRow {
+    display: grid;
+    grid-template-columns: 68px 1fr auto;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.hbarLabel {
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    color: var(--color-text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.hbarTrack {
+    background: var(--color-bg-cream);
+    border-radius: var(--radius-sm);
+    height: 14px;
+    overflow: hidden;
+}
+
+.hbarFill {
+    display: block;
+    background: var(--color-primary);
+    height: 100%;
+    border-radius: inherit;
+    transition: width var(--transition-base);
+}
+
+.hbarFillFlat {
+    display: block;
+    background: var(--color-accent);
+    height: 100%;
+    border-radius: inherit;
+}
+
+.hbarValue {
+    font-family: var(--font-en);
+    font-size: var(--text-xs);
+    font-variant-numeric: tabular-nums;
+    color: var(--color-text-secondary);
+    text-align: right;
+    white-space: nowrap;
+}
+
+.hbarDelta {
+    font-size: 11px;
+}
+
+/* ─── Daily 14 bars ──────────────────────────────────────── */
+.daily14 {
+    display: grid;
+    grid-template-columns: repeat(14, 1fr);
+    gap: 2px;
+    align-items: end;
+    height: 88px;
+    margin-top: var(--spacing-xs);
+}
+
+.daily14Col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    justify-content: flex-end;
+    gap: 3px;
+}
+
+.daily14Track {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+}
+
+.daily14Fill {
+    width: 100%;
+    min-height: 2px;
+    background: var(--color-primary);
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+}
+
+.daily14Label {
+    font-family: var(--font-en);
+    font-size: 8px;
+    color: var(--color-text-light);
+    white-space: nowrap;
+    transform: rotate(-45deg);
+    transform-origin: center;
+}
+
+.upcomingLine {
+    margin-top: var(--spacing-sm);
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    color: var(--color-text-secondary);
+}
+
+/* ─── Verdict banner ─────────────────────────────────────── */
+.verdictBanner {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-sm);
+    color: var(--color-bg-white);
+    box-shadow: var(--shadow-md);
+    margin-bottom: var(--spacing-xs);
+}
+
+.verdictChip {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 999px;
+    font-family: var(--font-en);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    padding: 2px 10px;
+    color: var(--color-bg-white);
+}
+
+.verdictHeadline {
+    font-family: var(--font-serif);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    line-height: 1.3;
+    margin-top: var(--spacing-xs);
+    color: var(--color-bg-white);
+}
+
+.verdictBasis {
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    color: rgba(255, 255, 255, 0.75);
+    margin-top: 4px;
+    line-height: 1.6;
+}
+
+/* ─── Action list ────────────────────────────────────────── */
+.actionList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-xs);
+}
+
+.actionItem {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-xs);
+    background: var(--color-bg-white);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-xs);
+    box-shadow: inset 0 0 0 1px rgba(44, 44, 44, 0.05);
+}
+
+.actionBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: var(--radius-md);
+    padding: 3px 8px;
+    border: 1px solid;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.actionBadgeGood {
+    background: var(--color-good-bg);
+    color: var(--color-good-text);
+    border-color: var(--color-good-border);
+}
+
+.actionBadgeWarn {
+    background: var(--color-warn-bg);
+    color: var(--color-warn-text);
+    border-color: var(--color-warn-border);
+}
+
+.actionBadgeAlert {
+    background: var(--color-alert-bg);
+    color: var(--color-alert-text);
+    border-color: var(--color-alert-border);
+}
+
+.actionBody {
+    flex: 1;
+    min-width: 0;
+}
+
+.actionTitle {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text-primary);
+    line-height: 1.4;
+}
+
+.actionEvidence {
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-top: 2px;
+}
+
+/* ─── Detail table ───────────────────────────────────────── */
+.tableWrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 520px;
+}
+
+.th,
+.thNum {
+    font-family: var(--font-en);
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    color: var(--color-text-light);
+    border-bottom: 1px solid rgba(212, 197, 176, 0.4);
+    padding: 6px 8px;
+    font-weight: 600;
+}
+
+.th {
+    text-align: left;
+}
+
+.thNum {
+    text-align: right;
+}
+
+.td,
+.tdNum {
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    color: var(--color-text-secondary);
+    border-bottom: 1px solid rgba(44, 44, 44, 0.04);
+    padding: 8px;
+    white-space: nowrap;
+}
+
+.tdNum {
+    text-align: right;
+    font-family: var(--font-en);
+    font-variant-numeric: tabular-nums;
+}
+
+/* ─── States (loading / error) ───────────────────────────── */
+.centerState,
+.errorState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    min-height: 60vh;
+    text-align: center;
+}
+
+.errorState {
+    max-width: 360px;
+    margin: 0 auto;
+    background: var(--color-alert-bg);
+    color: var(--color-alert-text);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+}
+
+.centerStateText,
+.errorStateText {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+.errorStateText {
+    color: var(--color-alert-text);
+}
+
+.spinner {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 3px solid var(--color-accent);
+    border-top-color: var(--color-primary);
+    animation: dashboardSpin 0.8s linear infinite;
+}
+
+@keyframes dashboardSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ─── Footer ─────────────────────────────────────────────── */
+.footer {
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    color: var(--color-text-light);
+    line-height: 1.8;
+    max-width: 60ch;
+    margin-top: var(--spacing-md);
+    padding-top: var(--spacing-sm);
+    border-top: 1px solid rgba(44, 44, 44, 0.06);
+}
+
+/* ─── Responsive (≥769px) ────────────────────────────────── */
+@media (min-width: 769px) {
+    .page {
+        padding: var(--spacing-md);
+    }
+
+    .headerTitle {
+        font-size: var(--text-xl);
+    }
+
+    .statGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .card {
+        padding: var(--spacing-md);
+    }
+}
