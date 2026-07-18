@@ -198,6 +198,9 @@ export default function AdminBlogPage() {
                             ＋ 新增文章
                         </button>
                     )}
+                    <a href="/admin/dashboard" style={{ color: 'var(--color-primary)', fontSize: 'var(--text-xs)' }}>
+                        晨報
+                    </a>
                     <button className={styles.logoutBtn} onClick={handleLogout}>
                         登出
                     </button>

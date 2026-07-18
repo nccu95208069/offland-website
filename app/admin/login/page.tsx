@@ -1,11 +1,19 @@
 'use client';
 
-import { useState, FormEvent } from 'react';
-import { useRouter } from 'next/navigation';
+import { Suspense, useState, FormEvent } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import styles from './page.module.css';
 
-export default function AdminLoginPage() {
+// 只接受站內 /admin 開頭的 next，擋 open redirect（//evil.com、http://… 都會被排除）。
+function safeNext(raw: string | null): string {
+    if (raw && raw.startsWith('/admin') && !raw.startsWith('//')) return raw;
+    return '/admin/blog';
+}
+
+function AdminLoginForm() {
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const nextPath = safeNext(searchParams.get('next'));
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -30,7 +38,7 @@ export default function AdminLoginPage() {
                 return;
             }
 
-            router.push('/admin/blog');
+            router.push(nextPath);
         } catch {
             setError('網路錯誤，請稍後再試。');
         } finally {
@@ -86,5 +94,13 @@ export default function AdminLoginPage() {
                 </form>
             </div>
         </div>
+    );
+}
+
+export default function AdminLoginPage() {
+    return (
+        <Suspense fallback={null}>
+            <AdminLoginForm />
+        </Suspense>
     );
 }
