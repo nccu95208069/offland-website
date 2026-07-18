@@ -25,6 +25,20 @@
   --color-accent: #D4C5B0;
   --color-accent-hover: #C4B5A0;
 
+  /* Semantic Colors - 大地色系語意版（DESIGN.md §2；配 icon+文字，不靠顏色單一）*/
+  --color-good: #6E8B5A;        /* 橄欖綠 — 有客/正向/不需行動 */
+  --color-good-bg: #EDF1E5;
+  --color-good-border: #C3D1AE;
+  --color-good-text: #4A5F3A;
+  --color-warn: #C68A2E;        /* 赭黃 — 先觀察 */
+  --color-warn-bg: #FBF1DD;
+  --color-warn-border: #E8CB93;
+  --color-warn-text: #8F6620;
+  --color-alert: #B54B36;       /* 磚紅/赤陶 — 建議行動 */
+  --color-alert-bg: #F7E8E3;
+  --color-alert-border: #E3B3A5;
+  --color-alert-text: #8A3826;
+
   /* Spacing System */
   --spacing-xs: 0.5rem;
   /* 8px */
