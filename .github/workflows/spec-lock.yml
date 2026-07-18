@@ -1,0 +1,41 @@
+# Spec Lock CI — drop into any repo at .github/workflows/spec-lock.yml
+# 母藍圖：~/.claude/UPGRADE_BLUEPRINT.md §#3 / P2 #9
+#
+# Phase 1（漸進式起點）：違規只警告，不擋 merge（SPEC_LOCK_PHASE=1）。
+# Phase 2（team 跑順、誤擋率低後）：把 SPEC_LOCK_PHASE 改成 "2" → 違規擋 merge。
+name: Spec Lock
+
+on:
+  pull_request:
+  push:
+    branches: [main, master]
+
+jobs:
+  spec-lock:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0          # 需要完整歷史才能算 range 與 hash-object
+
+      - name: Check spec alignment
+        env:
+          # ↓↓↓ 升級 teeth：Phase 1 → "2" 即開始擋 merge
+          SPEC_LOCK_PHASE: "1"
+        run: |
+          set -eu
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            BASE="${{ github.event.pull_request.base.sha }}"
+            HEAD="${{ github.event.pull_request.head.sha }}"
+          else
+            BASE="${{ github.event.before }}"
+            HEAD="${{ github.sha }}"
+          fi
+          ZERO="0000000000000000000000000000000000000000"
+          if [ -z "$BASE" ] || [ "$BASE" = "$ZERO" ]; then
+            RANGE="HEAD~1..HEAD"
+          else
+            RANGE="$BASE..$HEAD"
+          fi
+          echo "Spec Lock range: $RANGE (phase $SPEC_LOCK_PHASE)"
+          bash scripts/check-spec-lock.sh "$RANGE"
