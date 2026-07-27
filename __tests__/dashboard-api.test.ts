@@ -2,9 +2,11 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 
 // Mock 外部邊界：iron-session 認證與 Sheets client。被測的 parse/compute 邏輯不 mock。
 // SheetsError 保留真實 class（route 用 instanceof 分流 502），只 stub getOfflandSheetRows。
-vi.mock("@/lib/auth", () => ({
-  isAuthenticated: vi.fn(),
-}));
+vi.mock("@/lib/auth", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@/lib/auth")>();
+  // isAuthenticated mock（session 情境由各測試控制）；hasValidApiToken 用真實作
+  return { ...actual, isAuthenticated: vi.fn() };
+});
 vi.mock("@/lib/sheets", async () => {
   const actual = await vi.importActual<typeof import("@/lib/sheets")>("@/lib/sheets");
   return { ...actual, getOfflandSheetRows: vi.fn() };

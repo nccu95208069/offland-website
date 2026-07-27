@@ -4,8 +4,7 @@
 //   - 5 分鐘 module-scope in-memory cache；?refresh=1 清 cache。不 cache 401、不 cache 錯誤。
 //   - 唯讀 工作表1!A2:N；「今天」以台北時間計（server 是 UTC）。
 import { NextResponse } from "next/server";
-import { timingSafeEqual } from "crypto";
-import { isAuthenticated } from "@/lib/auth";
+import { isAuthenticated, hasValidApiToken } from "@/lib/auth";
 import { getOfflandSheetRows, SheetsError } from "@/lib/sheets";
 import {
   parseOfflandNights,
@@ -39,20 +38,6 @@ async function buildOfflandData(): Promise<OfflandData> {
   const data = computeOffland(bookings, nights, taipeiToday(now), asOf);
   cachedData = { data, timestamp: Date.now() };
   return data;
-}
-
-/** 伺服器對伺服器認證（如 Super Molly PWA）：Authorization: Bearer <OFFLAND_API_TOKEN>。
- * 常數時間比對；未設 token 一律 false（不會意外全開）。 */
-function hasValidApiToken(request: Request): boolean {
-  const token = process.env.OFFLAND_API_TOKEN;
-  if (!token) return false;
-  const auth = request.headers.get("authorization") || "";
-  const provided = auth.startsWith("Bearer ") ? auth.slice(7) : "";
-  if (!provided) return false;
-  const a = Buffer.from(provided);
-  const b = Buffer.from(token);
-  if (a.length !== b.length) return false;
-  return timingSafeEqual(a, b);
 }
 
 export async function GET(request: Request) {

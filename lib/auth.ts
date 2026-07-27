@@ -1,3 +1,4 @@
+import { timingSafeEqual } from "crypto";
 import { getIronSession, IronSession } from 'iron-session';
 import { cookies } from 'next/headers';
 
@@ -21,6 +22,20 @@ export async function getSession(): Promise<IronSession<SessionData>> {
     const cookieStore = await cookies();
     const session = await getIronSession<SessionData>(cookieStore, sessionOptions);
     return session;
+}
+
+/** 伺服器對伺服器認證（如 Super Molly PWA）：Authorization: Bearer <OFFLAND_API_TOKEN>。
+ * 常數時間比對；未設 token 一律 false（不會意外全開）。 */
+export function hasValidApiToken(request: Request): boolean {
+    const token = process.env.OFFLAND_API_TOKEN;
+    if (!token) return false;
+    const auth = request.headers.get("authorization") || "";
+    const provided = auth.startsWith("Bearer ") ? auth.slice(7) : "";
+    if (!provided) return false;
+    const a = Buffer.from(provided);
+    const b = Buffer.from(token);
+    if (a.length !== b.length) return false;
+    return timingSafeEqual(a, b);
 }
 
 export async function isAuthenticated(): Promise<boolean> {
