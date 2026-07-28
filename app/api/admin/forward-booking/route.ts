@@ -17,14 +17,15 @@ const CACHE_DURATION = 5 * 60 * 1000;
 async function buildData() {
   if (cached && Date.now() - cached.timestamp < CACHE_DURATION) return cached.data;
   const rows = await getOfflandSheetRows();
-  const bookings = mergeOfflandBookings(parseOfflandNights(rows));
+  const nights = parseOfflandNights(rows);
+  const bookings = mergeOfflandBookings(nights);
   const now = new Date();
   const data = {
     asOf: new Intl.DateTimeFormat("zh-TW", {
       timeZone: "Asia/Taipei", month: "numeric", day: "numeric",
       hour: "2-digit", minute: "2-digit", hour12: false,
     }).format(now),
-    months: computeOfflandForwardBooking(bookings, now),
+    months: computeOfflandForwardBooking(nights, bookings, now),
   };
   cached = { data, timestamp: Date.now() };
   return data;
