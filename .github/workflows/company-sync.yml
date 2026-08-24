@@ -1,0 +1,60 @@
+name: Sync to The Company
+
+on:
+  push:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: company-sync-${{ github.repository }}
+  cancel-in-progress: true
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send project update
+        env:
+          COMPANY_PROJECT_ID: offland
+          COMPANY_ARTIFACT_ID: offland-context
+          COMPANY_SYNC_TOKEN: ${{ secrets.COMPANY_SYNC_TOKEN }}
+          COMPANY_SITE_BYPASS_TOKEN: ${{ secrets.COMPANY_SITE_BYPASS_TOKEN }}
+          EVENT_NAME: ${{ github.event_name }}
+          EVENT_ACTION: ${{ github.event.action }}
+          EVENT_SUMMARY: ${{ github.event.head_commit.message || github.event.pull_request.title || github.ref_name }}
+        run: |
+          if [ -z "$COMPANY_SYNC_TOKEN" ] || [ -z "$COMPANY_SITE_BYPASS_TOKEN" ]; then
+            echo "Company sync secrets are unavailable; skipping."
+            exit 0
+          fi
+
+          occurred_at="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+          repo_url="${{ github.server_url }}/${{ github.repository }}"
+          event_url="$repo_url/commit/${{ github.sha }}"
+          metadata="$(jq -nc --arg sha '${{ github.sha }}' --arg ref '${{ github.ref_name }}' --arg actor '${{ github.actor }}' '{sha:$sha,ref:$ref,actor:$actor}|tostring')"
+          payload="$(jq -nc \
+            --arg source "github-actions:${{ github.repository }}" \
+            --arg project "$COMPANY_PROJECT_ID" \
+            --arg artifact "$COMPANY_ARTIFACT_ID" \
+            --arg repository '${{ github.repository }}' \
+            --arg repo_url "$repo_url" \
+            --arg event_id "$COMPANY_PROJECT_ID:github:${{ github.run_id }}:${{ github.run_attempt }}" \
+            --arg event_name "$EVENT_NAME" \
+            --arg event_action "$EVENT_ACTION" \
+            --arg summary "$EVENT_SUMMARY" \
+            --arg event_url "$event_url" \
+            --arg occurred_at "$occurred_at" \
+            --arg metadata "$metadata" \
+            '{source:$source,artifacts:[{id:$artifact,projectId:$project,title:($repository+" 程式庫"),kind:"repository",source:"GitHub Actions",locationLabel:$repository,syncMode:"automatic",syncStatus:"live",freshnessLabel:"剛剛自動同步",summary:$summary,url:$repo_url,content:null,contentHash:null,syncedAt:$occurred_at,sortOrder:1000}],events:[{id:$event_id,projectId:$project,source:"GitHub Actions",eventType:$event_name,title:($repository+" · "+$event_name+(if $event_action=="" then "" else " · "+$event_action end)),summary:$summary,url:$event_url,occurredAt:$occurred_at,metadataJson:$metadata}]}')"
+
+          curl --fail-with-body --silent --show-error \
+            --request POST \
+            --header "OAI-Sites-Authorization: Bearer $COMPANY_SITE_BYPASS_TOKEN" \
+            --header "X-Company-Sync-Token: $COMPANY_SYNC_TOKEN" \
+            --header "Content-Type: application/json" \
+            --data "$payload" \
+            https://sean-company-control.nccu95208069.chatgpt.site/api/sync
